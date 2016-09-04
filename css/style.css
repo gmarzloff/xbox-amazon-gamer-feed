@@ -1,0 +1,55 @@
+
+#gamerFeedContainer {
+	/* main wrapper for plug-in */
+	width: 600px;
+	background: linear-gradient(135deg, #eee, #555);
+	border: 4px #666 solid;
+	min-height: 100px;
+}
+
+#gamerTag {
+	font-family: 'Black Ops One', cursive;
+	font-size: 36px;
+	color: rgba(3, 101, 17, 1);
+	padding: 10px;
+	border: solid 3px gray;
+	background: linear-gradient(135deg, #eef, #dde);
+	width: 60%;
+	letter-spacing: 2px;
+	margin: 5px auto;
+	text-align: center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#gamesContainer > div {
+	border: 1px solid gray;
+	margin: 5px;
+	padding: 5px;
+}
+#gamesContainer .thumbContainer {
+	float: left;
+	width: 150px;
+}
+
+#gamesContainer img {
+	width: 140px;
+	border: 0;
+}
+
+.error {
+	color: red;
+	font-family: monospace;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
