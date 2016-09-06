@@ -36,11 +36,11 @@ h1 {
 	z-index: 10;
 	position: absolute;
 	left: 250px;
-	background-color: lightblue;
-	border-radius: 20px;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border: 2px solid darkblue;
+	background-color: lightgreen;
+	border-radius: 50px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 60px;
+	border: 2px solid green;
 	padding: 20px;
 }
 #loading > img {
