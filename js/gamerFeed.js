@@ -86,9 +86,4 @@ $(document).ready(function(){
 		return myHTML;
 	}
 
-
-	function advanceProgressBar(){
-		// add a tick each time api calls complete
-	}
-
 });
