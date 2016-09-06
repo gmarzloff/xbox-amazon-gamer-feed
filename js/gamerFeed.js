@@ -42,9 +42,9 @@ $(document).ready(function(){
 							user.recentGames = filterdata;
 
 							// search Amazon stuff & get links
-							amazon.getLinks(filterdata, function(gamesWithAmazonLinks){
-
-								$('#gamesContainer').html(generateGamesHTML(gamesWithAmazonLinks));
+							amazon.getItemInfo(filterdata, function(gamesWithAmazonDetails){
+								console.dir(gamesWithAmazonDetails);
+								$('#gamesContainer').html(generateGamesHTML(gamesWithAmazonDetails));
 							});
 
 						});
@@ -62,19 +62,23 @@ $(document).ready(function(){
 		}
 	}
 
+	function generateGamesHTML(games){
+		var myHTML = '';
+		for(i=0;i<games.length;i++){
+			var game = games[i];
+			var prettyDate = moment(game.lastPlayed).format('MMMM Do YYYY, h:mm:ss a'); // using moment.js library
+
+			myHTML += '<div class="clearfix"><div class="thumbContainer"><img src="' + unescape(game.contentImageUri) + '" /></div>' +
+					game.contentTitle + '<br />Last played: ' + prettyDate + 
+					'<br /><div class="amazon">Amazon Price: <a class="amazonLink" target="amazon" href="' + game.DetailPageURL + "&AssociateTag=" + amazon.myAssociateID + '">' + game.LowestPrice + "</a>\n" +
+			 				  game.Description + "</div>\n</div></div>";
+		}
+		return myHTML;
+	}
+
+
 	function advanceProgressBar(){
 		// add a tick each time api calls complete
 	}
 
-	function generateGamesHTML(games){
-		var myHTML = '';
-		for(i=0;i<games.length;i++){
-			var prettyDate = moment(games[i].lastPlayed).format('MMMM Do YYYY, h:mm:ss a'); // uses moment.js library
-
-			myHTML += '<div class="clearfix"><div class="thumbContainer"><img src="' + unescape(games[i].contentImageUri) + '" /></div>' +
-					games[i].contentTitle + '<br />Last played: ' + prettyDate + 
-					'<br /><a href="' + games[i].amazonLink + '">Amazon Link</a></div>';
-		}
-		return myHTML;
-	}
 });

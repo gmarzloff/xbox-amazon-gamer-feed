@@ -40,7 +40,7 @@ function XboxProxyAPI (){
 				
 			});
 
-			callback(gamesOnlyActivities); // send data array back to caller gamerFeed.js
+			callback(gamesOnlyActivities); // send games array back to caller (gamerFeed.js)
 
 		});
 	}; 
