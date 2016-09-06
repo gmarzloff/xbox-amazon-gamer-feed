@@ -1,3 +1,12 @@
+h1 {
+	font-family: sans-serif;
+	font-size: 30px;
+}
+
+.searchButton {
+	font-size: 16px;
+	background-color: lightgreen;
+}
 
 #gamerFeedContainer {
 	/* main wrapper for plug-in */
@@ -23,12 +32,36 @@
 	border-radius: 10px;
 }
 
+#loading {
+	z-index: 10;
+	position: absolute;
+	left: 250px;
+	background-color: lightblue;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border: 2px solid darkblue;
+	padding: 20px;
+}
+#loading > img {
+	width: 80px;
+}
+
+.hidden{
+	opacity: 0.0;
+}
+
 #gamesContainer > div {
 	border: 1px solid gray;
 	margin: 5px;
 	padding: 5px;
 	font-family: sans-serif;
 	font-size: 1.2em;
+}
+
+.gameTitle {
+	font-weight:  bold;
+	font-size: 1.4em;
 }
 
 #gamesContainer .thumbContainer {

@@ -3,6 +3,8 @@ $(document).ready(function(){
 	// Collect data from xbox api
 	var xbox = new XboxProxyAPI();
 	var amazon = new AmazonUtils();
+
+	$('#gamerTag').html('username');
 	var gamerTagInput = prompt('Please type desired Xbox GamerTag','ricketycrikett');
 	// var gamerTagInput = 'ricketycrikett';
 
@@ -19,11 +21,17 @@ $(document).ready(function(){
 	$('#searchUserButton').click(function(){
 		gamerTagInput = prompt('Please type desired Xbox GamerTag',gamerTagInput);
 		searchForGames();
-		$('#gamerTag').html(gamerTagInput);
+		
 	});
 
 	function searchForGames(){
 		if (gamerTagInput != null){
+
+			$('#gamerTag').html(gamerTagInput);
+			$('#gamerTag').fadeIn("slow");
+			$('#gamesContainer').slideUp("fast");	
+			$('#loading').fadeIn("slow").removeClass("hidden");
+
 			// Exchange gamerTag for XUID
 			xbox.fetch('xuid',gamerTagInput, function(data){
 
@@ -43,8 +51,10 @@ $(document).ready(function(){
 
 							// search Amazon stuff & get links
 							amazon.getItemInfo(filterdata, function(gamesWithAmazonDetails){
-								console.dir(gamesWithAmazonDetails);
+								// console.dir(gamesWithAmazonDetails);
+								$('#loading').fadeOut("slow");
 								$('#gamesContainer').html(generateGamesHTML(gamesWithAmazonDetails));
+								$('#gamesContainer').slideDown("fast");
 							});
 
 						});
@@ -69,7 +79,7 @@ $(document).ready(function(){
 			var prettyDate = moment(game.lastPlayed).format('MMMM Do YYYY, h:mm:ss a'); // using moment.js library
 
 			myHTML += '<div class="clearfix"><div class="thumbContainer"><img src="' + unescape(game.contentImageUri) + '" /></div>' +
-					game.contentTitle + '<br />Last played: ' + prettyDate + 
+					'<span class="gameTitle">' + game.contentTitle + '</span><br />Last played: ' + prettyDate + 
 					'<br /><div class="amazon">Amazon Price: <a class="amazonLink" target="amazon" href="' + game.DetailPageURL + "&AssociateTag=" + amazon.myAssociateID + '">' + game.LowestPrice + "</a>\n" +
 			 				  game.Description + "</div>\n</div></div>";
 		}
