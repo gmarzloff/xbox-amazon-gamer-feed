@@ -5,8 +5,8 @@ $(document).ready(function(){
 	var amazon = new AmazonUtils();
 
 	$('#gamerTag').html('username');
-	var gamerTagInput = prompt('Please type desired Xbox GamerTag','ricketycrikett');
-	// var gamerTagInput = 'ricketycrikett';
+	var gamerTagInput = prompt('Please type desired Xbox GamerTag','ricketycrikett'); // Use any default gamertag here
+	// var gamerTagInput = 'ricketycrikett'; // or programmatically define the gamerTagInput here
 
 	var user = {
 		XUID: "",
@@ -39,7 +39,7 @@ $(document).ready(function(){
 				if(data.res.error_message == null){
 					user.XUID = data.res;
 
-					//For my next trick, get gamerProfile.
+					// Next, get gamerProfile.
 					// Method invoked within prior fetch callback to ensure XUID exists
 					xbox.fetch('profile', user.XUID, function(data){
 

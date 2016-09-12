@@ -1,5 +1,5 @@
 function AmazonUtils (){
-	this.myAssociateID = 'nextec-20';
+	this.myAssociateID = ''; // ENTER YOUR ASSOCIATE ID HERE
 
 	this.getItemInfo = function(data, callback){
 
@@ -11,9 +11,11 @@ function AmazonUtils (){
 			var amazonFeedURL = generateAmazonFeedURL(game.contentTitle);
 			console.log(amazonFeedURL);
 			$.getJSON(amazonFeedURL,function(amazonData){
+
 				console.dir(amazonData);
 
 				var topAmazonResult = amazonData.res[0];
+
 				// adds the Amazon properties to the game objects in the games array 
 				game.DetailPageURL = topAmazonResult.DetailPageURL[0];
 				game.ASIN = topAmazonResult.ASIN[0];
