@@ -14,20 +14,36 @@ function AmazonUtils (){
 
 				console.dir(amazonData);
 
-				var topAmazonResult = amazonData.res[0];
+				if(amazonData.hasOwnProperty('error')){
 
-				// adds the Amazon properties to the game objects in the games array 
-				game.DetailPageURL = topAmazonResult.DetailPageURL[0];
-				game.ASIN = topAmazonResult.ASIN[0];
-				game.LowestPrice = topAmazonResult.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0];
-				game.Description = arrayToPs(topAmazonResult.ItemAttributes[0].Feature);
-				
+					// Error instead of results. As an alternative, we can provide an I'm Feeling Lucky link
+					var feelingLuckyLink ='https://www.google.com/search?q=' + encodeURIComponent(game.contentTitle) + '&btnI';
+
+					game.DetailPageURL = feelingLuckyLink;
+					game.ASIN = '';
+					game.LowestPrice = 'search for price';
+					game.Description = '<p>See more information at link above</p>';
+
+				}else{
+
+					var topAmazonResult = amazonData.res[0];
+
+					// adds the Amazon properties to the game objects in the games array 
+					game.DetailPageURL = topAmazonResult.DetailPageURL[0];
+					game.ASIN = topAmazonResult.ASIN[0];
+					game.LowestPrice = topAmazonResult.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0];
+					game.Description = arrayToPs(topAmazonResult.ItemAttributes[0].Feature);
+					
+				}
+
 				remaining_callbacks--;  // decrease the counter (represents n times to fetch Amazon data)
+				
 				if(remaining_callbacks <= 0){
 					//	when the counter hits 0, the games' properties are completely populated
 					//  so now we can write the HTML
 					callback(data);
-				}
+				}	
+
 			});
 		});
 	};
@@ -41,7 +57,7 @@ function AmazonUtils (){
 	};
 
 	arrayToPs= function(arr){
-		var str = ""
+		var str = "";
 		for (i=0; i<arr.length; i++){
 			str += '<p>' + arr[i] + "</p>\n";
 		}

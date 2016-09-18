@@ -17,24 +17,29 @@ function XboxProxyAPI (){
 			// result format is a JSON string which you need to parse
 			var unfilteredActivities = JSON.parse(result.res).activityItems;
 			var gamesOnlyActivities = [];
+			var maxResultsToReturn = 5;
+
 			$.each(unfilteredActivities,function(index,item){
 
-				if(item.contentType == "Game"){
-					// Filter only unique Games
-					var unique = true;
-					for(i=0; i<gamesOnlyActivities.length; i++){
-						if(gamesOnlyActivities[i].contentTitle === item.contentTitle){
-							unique = false;
-							break;
+				if(gamesOnlyActivities.length < maxResultsToReturn){
+
+					if(item.contentType == "Game"){
+						// Filter only unique Games
+						var unique = true;
+						for(i=0; i<gamesOnlyActivities.length; i++){
+							if(gamesOnlyActivities[i].contentTitle === item.contentTitle){
+								unique = false;
+								break;
+							}
 						}
-					}
-					if(unique){
-						//save game's title (contentTitle), thumbnail (contentImageUri), last played (startTime)
-						gamesOnlyActivities.push({
-							contentTitle: item.contentTitle,
-							contentImageUri : item.contentImageUri,
-							lastPlayed : item.startTime
-						});
+						if(unique){
+							//save game's title (contentTitle), thumbnail (contentImageUri), last played (startTime)
+							gamesOnlyActivities.push({
+								contentTitle: item.contentTitle,
+								contentImageUri : item.contentImageUri,
+								lastPlayed : item.startTime
+							});
+						}
 					}
 				}
 				

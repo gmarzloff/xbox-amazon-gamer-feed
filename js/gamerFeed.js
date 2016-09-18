@@ -46,17 +46,24 @@ $(document).ready(function(){
 						user.gamerProfile = data.res;
 						// get customized recent games list
 						xbox.filterRecentGames(user.XUID, function(filterdata){
+							
+							if(filterdata.length==0){
 
-							user.recentGames = filterdata;
-
-							// search Amazon stuff & get links
-							amazon.getItemInfo(filterdata, function(gamesWithAmazonDetails){
-								// console.dir(gamesWithAmazonDetails);
 								$('#loading').fadeOut("slow");
-								$('#gamesContainer').html(generateGamesHTML(gamesWithAmazonDetails));
+								$('#gamesContainer').html('<div class="clearfix"><span class="gameTitle">Sorry, no recent games found.</span></div>');
 								$('#gamesContainer').slideDown("fast");
-							});
 
+							}else{
+								user.recentGames = filterdata;
+
+								// search Amazon stuff & get links
+								amazon.getItemInfo(filterdata, function(gamesWithAmazonDetails){
+									// console.dir(gamesWithAmazonDetails);
+									$('#loading').fadeOut("slow");
+									$('#gamesContainer').html(generateGamesHTML(gamesWithAmazonDetails));
+									$('#gamesContainer').slideDown("fast");
+								});
+							}
 						});
 					});
 
