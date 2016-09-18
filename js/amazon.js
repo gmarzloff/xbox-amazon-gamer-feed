@@ -56,10 +56,15 @@ function AmazonUtils (){
 		return baseURL + encodeURIComponent(gameName) + '?&callback=?';
 	};
 
-	arrayToPs= function(arr){
+	arrayToPs = function(arr){
 		var str = "";
-		for (i=0; i<arr.length; i++){
-			str += '<p>' + arr[i] + "</p>\n";
+		
+		if(typeof arr != 'undefined'){ // Some Items don't include a Feature property; in this case we return a filler
+			for (i=0; i<arr.length; i++){
+				str += '<p>' + arr[i] + "</p>\n";
+			}
+		}else{
+			str = '<p>See more information at link above</p>';
 		}
 		return str;
 	}
